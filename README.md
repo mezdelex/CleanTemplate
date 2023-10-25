@@ -1,2 +1,2 @@
 # CleanTemplate
-Clean Architecture + DDD + CQRS + Event Sourcing
+Clean Architecture + DDD + CQRS + Domain Events + Testing

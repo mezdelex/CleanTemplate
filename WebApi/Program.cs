@@ -1,6 +1,7 @@
 using Application;
 using Infrastructure;
 using Presentation;
+using Presentation.Endpoints;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +24,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapUserEndpoints();
+
 app.UseHttpsRedirection();
+
 app.UseSerilogRequestLogging();
 
 app.Run();
