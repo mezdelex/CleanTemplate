@@ -10,6 +10,7 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Name).HasMaxLength(30).IsRequired();
+        builder.HasIndex(p => p.Email).IsUnique();
         builder.Property(p => p.Email).HasMaxLength(30).IsRequired();
         builder.Property(p => p.Password).HasMaxLength(16).IsRequired();
     }

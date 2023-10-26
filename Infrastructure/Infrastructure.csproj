@@ -7,9 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="efcore.namingconventions" Version="7.0.2" />
         <PackageReference Include="microsoft.entityframeworkcore" Version="7.0.13" />
-        <PackageReference Include="microsoft.extensions.dependencyinjection.abstractions"
-            Version="7.0.0" />
+        <PackageReference Include="microsoft.extensions.dependencyinjection.abstractions" Version="7.0.0" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
     </ItemGroup>
 
     <ItemGroup>

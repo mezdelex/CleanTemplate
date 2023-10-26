@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Users.Create;
 
-internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
+internal sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;
@@ -15,9 +15,9 @@ internal class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
         _userRepository = userRepository;
     }
 
-    public async Task Handle(CreateUserCommand command, CancellationToken cancellationToken)
+    public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        await _userRepository.CreateAsync(new User(new Guid(), command.Name, command.Email, command.Password));
+        await _userRepository.CreateAsync(new User(new Guid(), request.Name, request.Email, request.Password));
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
