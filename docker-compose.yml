@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+
+    environment: 
+      POSTGRES_DB: cleantemplate
+      POSTGRES_USER: mezdelex
+      POSTGRES_PASSWORD: mezdelex
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - ./Docker/.containers/database:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:management
+
+    environment:
+      RABBITMQ_DEFAULT_USER: mezdelex
+      RABBITMQ_DEFAULT_PASS: mezdelex
+    ports:
+      # AMQP protocol port
+      - 5672:5672
+      # HTTP management UI
+      - 15672:15672
+    restart: always

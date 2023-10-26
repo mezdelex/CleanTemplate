@@ -2,7 +2,11 @@ using Application.Users.Create;
 using Application.Users.Get;
 using Application.Users.GetAll;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 
 namespace Presentation.Endpoints;
 
