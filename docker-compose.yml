@@ -20,9 +20,13 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: mezdelex
       RABBITMQ_DEFAULT_PASS: mezdelex
+    hostname: clean-rabbit
     ports:
       # AMQP protocol port
       - 5672:5672
       # HTTP management UI
       - 15672:15672
     restart: always
+    volumes:
+      - ./Docker/.containers/queue/data/:/var/lib/rabbitmq
+      - ./Docker/.containers/queue/log/:/var/log/rabbitmq

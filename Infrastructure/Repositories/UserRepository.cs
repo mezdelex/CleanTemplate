@@ -12,8 +12,8 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task CreateAsync(User user)
+    public async Task CreateAsync(User user, CancellationToken cancellationToken = default)
     {
-        await _context.Users.AddAsync(user);
+        await _context.Users.AddAsync(user, cancellationToken);
     }
 }

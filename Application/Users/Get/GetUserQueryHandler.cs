@@ -15,7 +15,7 @@ internal sealed class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDT
 
     public async Task<UserDTO> Handle(GetUserQuery request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Id == request.Id)
+        var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Id == request.Id, cancellationToken)
             ?? throw new UserNotFoundException(request.Id);
 
         return new UserDTO(user.Id, user.Name, user.Email);

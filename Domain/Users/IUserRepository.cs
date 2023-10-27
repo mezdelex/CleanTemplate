@@ -2,5 +2,5 @@ namespace Domain.Users;
 
 public interface IUserRepository
 {
-    Task CreateAsync(User user);
+    Task CreateAsync(User user, CancellationToken cancellationToken = default);
 }

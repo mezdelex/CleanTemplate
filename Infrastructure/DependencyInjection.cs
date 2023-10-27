@@ -15,8 +15,8 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")).UseSnakeCaseNamingConvention());
         services.AddScoped<IApplicationDbContext>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
-
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
         services.AddScoped<IUserRepository, UserRepository>();
     }
 }

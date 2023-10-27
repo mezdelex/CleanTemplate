@@ -2,5 +2,5 @@ namespace Domain;
 
 public interface IUnitOfWork
 {
-    Task SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
+    Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }
