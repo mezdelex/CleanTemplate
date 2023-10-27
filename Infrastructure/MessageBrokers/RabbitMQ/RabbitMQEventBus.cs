@@ -1,4 +1,4 @@
-using Application;
+using Application.Abstractions;
 
 namespace Infrastructure.MessageBrokers.RabbitMQ;
 

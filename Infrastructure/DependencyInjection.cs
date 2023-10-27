@@ -1,6 +1,8 @@
-using Application;
+using Application.Contexts;
 using Domain;
 using Domain.Users;
+using Infrastructure.Contexts;
+using Infrastructure.Persistence;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
