@@ -10,4 +10,4 @@ Clean Architecture + DDD + CQRS + Domain Events + Testing
 ## Database
 `dotnet ef database update --project .\Infrastructure\Infrastructure.csproj --startup-project .\WebApi\WebApi.csproj`
 
-<sub>There's stuff that shoud be private kept public on purpose, like `appsettings.json` and `Docker` directory, for discoverability.</sub>
+<sub>There's stuff that should be private kept public on purpose, like `appsettings(.Development).json`, for discoverability.</sub>
