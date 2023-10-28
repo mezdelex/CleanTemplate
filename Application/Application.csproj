@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="fluentvalidation.dependencyinjectionextensions" Version="11.8.0" />
+    <PackageReference Include="masstransit" Version="8.1.1" />
     <PackageReference Include="mediatr" Version="12.1.1" />
     <PackageReference Include="microsoft.entityframeworkcore" Version="7.0.13" />
   </ItemGroup>

@@ -7,8 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="masstransit" Version="8.1.1" />
-        <PackageReference Include="masstransit.rabbitmq" Version="8.1.1" />
         <PackageReference Include="microsoft.aspnetcore.openapi" Version="7.0.13" />
         <PackageReference Include="microsoft.entityframeworkcore.design" Version="7.0.13">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

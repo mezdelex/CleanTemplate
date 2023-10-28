@@ -1,13 +1,19 @@
 using Application.Abstractions;
+using MassTransit;
 
 namespace Infrastructure.MessageBrokers.RabbitMQ;
 
-internal sealed class RabbitMQEventBus : IEventBus
+public sealed class RabbitMQEventBus : IEventBus
 {
-    // TODO: Continue here
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public Task PublishAsync<T>(T message, CancellationToken cancellationToken = default)
+    public RabbitMQEventBus(IPublishEndpoint publishEndpoint)
     {
-        throw new NotImplementedException();
+        _publishEndpoint = publishEndpoint;
+    }
+
+    public Task PublishAsync<T>(T message, CancellationToken cancellationToken = default) where T : class
+    {
+        return _publishEndpoint.Publish(message, cancellationToken);
     }
 }

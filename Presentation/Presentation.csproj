@@ -1,23 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="mediatr" Version="12.1.1" />
-        <PackageReference Include="microsoft.extensions.dependencyinjection.abstractions"
-            Version="7.0.0" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="mediatr" Version="12.1.1" />
+    <PackageReference Include="microsoft.extensions.dependencyinjection.abstractions"
+      Version="7.0.0" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
-    </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Application\Application.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+  </ItemGroup>
 
 </Project>

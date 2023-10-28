@@ -1,3 +1,4 @@
+using Application.Contexts;
 using MediatR;
 
 namespace Application.Users.GetAll;

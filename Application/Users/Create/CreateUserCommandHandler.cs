@@ -1,5 +1,6 @@
-using Domain;
+using Application.Abstractions;
 using Domain.Users;
+using Domain;
 using MediatR;
 
 namespace Application.Users.Create;

@@ -1,5 +1,5 @@
-using System.Text.RegularExpressions;
 using FluentValidation;
+using System.Text.RegularExpressions;
 
 namespace Application.Users.Create;
 

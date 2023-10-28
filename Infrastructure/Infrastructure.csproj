@@ -1,24 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="efcore.namingconventions" Version="7.0.2" />
-        <PackageReference Include="masstransit" Version="8.1.1" />
-        <PackageReference Include="microsoft.entityframeworkcore" Version="7.0.13" />
-        <PackageReference Include="microsoft.entityframeworkcore.design" Version="7.0.13">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-        <PackageReference Include="npgsql.entityframeworkcore.postgresql" Version="7.0.11" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="efcore.namingconventions" Version="7.0.2" />
+    <PackageReference Include="masstransit" Version="8.1.1" />
+    <PackageReference Include="masstransit.rabbitmq" Version="8.1.1" />
+    <PackageReference Include="microsoft.entityframeworkcore" Version="7.0.13" />
+    <PackageReference Include="microsoft.entityframeworkcore.design" Version="7.0.13">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="npgsql.entityframeworkcore.postgresql" Version="7.0.11" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Application\Application.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+  </ItemGroup>
 
 </Project>
