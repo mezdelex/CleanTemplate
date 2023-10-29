@@ -6,7 +6,7 @@ using FluentValidation;
 
 namespace Application.Users.Create;
 
-internal sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
+public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
 {
     private readonly IEventBus _eventBus;
     private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +23,10 @@ internal sealed class CreateUserCommandHandler : IRequestHandler<CreateUserComma
 
     public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        await _validator.ValidateAndThrowAsync(request, cancellationToken);
+        var results = await _validator.ValidateAsync(request, cancellationToken);
+
+        if (!results.IsValid)
+            throw new ValidationException(results.ToString());
 
         var newUser = new User(new Guid(), request.Name, request.Email, request.Password);
 
