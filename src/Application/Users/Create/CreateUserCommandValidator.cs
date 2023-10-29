@@ -6,9 +6,9 @@ namespace Application.Users.Create;
 
 public sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
-    private const int NameMaxLength = 30;
-    private const int EmailMaxLength = 30;
-    private const int PasswordMaxLength = 16;
+    public readonly int NameMaxLength = 30;
+    public readonly int EmailMaxLength = 30;
+    public readonly int PasswordMaxLength = 16;
 
     public CreateUserCommandValidator()
     {
@@ -23,9 +23,9 @@ public sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCom
             var match = Regex.Match(email, pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.NonBacktracking);
 
             return match.Success;
-        }).WithMessage("Should comply with RFC2822 standards.");
+        }).WithMessage(GenericValidatorMessages.ShouldComplyWithRFC2822StandardsMessage());
 
         RuleFor(cuc => cuc.Password).NotEmpty().WithMessage(GenericValidatorMessages.ShouldNotBeEmptyMessage());
-        RuleFor(cuc => cuc.Password).MaximumLength(NameMaxLength).WithMessage(GenericValidatorMessages.ShouldBeShorterThanMessage(PasswordMaxLength));
+        RuleFor(cuc => cuc.Password).MaximumLength(PasswordMaxLength).WithMessage(GenericValidatorMessages.ShouldBeShorterThanMessage(PasswordMaxLength));
     }
 }
