@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Users.Get;
 
-internal sealed class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDTO>
+public sealed class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDTO>
 {
     private readonly IApplicationDbContext _context;
 

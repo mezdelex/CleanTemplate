@@ -23,10 +23,8 @@ public static class UserEndpoints
         group.MapPost("", CreateUserAsync);
     }
 
-    public static async Task<IResult> GetAllUsersAsync(ISender sender)
-    {
-        return Results.Ok(await sender.Send(new GetAllUsersQuery()));
-    }
+    public static async Task<IResult> GetAllUsersAsync(ISender sender) =>
+         Results.Ok(await sender.Send(new GetAllUsersQuery()));
 
     public static async Task<IResult> GetUserAsync([FromRoute] Guid id, ISender sender)
     {
