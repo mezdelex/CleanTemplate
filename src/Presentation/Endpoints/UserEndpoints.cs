@@ -23,8 +23,19 @@ public static class UserEndpoints
         group.MapPost("", CreateUserAsync);
     }
 
-    public static async Task<IResult> GetAllUsersAsync(ISender sender) =>
-         Results.Ok(await sender.Send(new GetAllUsersQuery()));
+    public static async Task<IResult> GetAllUsersAsync([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string? dynamicOrderParams, ISender sender)
+    {
+        try
+        {
+            return Results.Ok(await sender.Send(new GetAllUsersQuery(page, pageSize, dynamicOrderParams!)));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message, e);
+
+            return Results.BadRequest(e.Message);
+        }
+    }
 
     public static async Task<IResult> GetUserAsync([FromRoute] Guid id, ISender sender)
     {

@@ -1,9 +1,11 @@
 using Application.Contexts;
+using Application.Users.Shared;
 using MediatR;
+using static Domain.Extensions.Collections.Collections;
 
 namespace Application.Users.GetAll;
 
-public sealed class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, List<UserDTO>>
+public sealed class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, PagedList<UserDTO>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -12,6 +14,9 @@ public sealed class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, 
         _context = context;
     }
 
-    public async Task<List<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken) =>
-        await Task.Run(() => _context.Users.Select(user => new UserDTO(user.Id, user.Name, user.Email)).ToList(), cancellationToken);
+    public async Task<PagedList<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken) =>
+         await _context.Users
+             .ToDynamicOrder(request.DynamicOrderParams)
+             .Select(user => new UserDTO(user.Id, user.Name, user.Email))
+             .ToPagedListAsync(request.Page, request.PageSize, cancellationToken);
 }

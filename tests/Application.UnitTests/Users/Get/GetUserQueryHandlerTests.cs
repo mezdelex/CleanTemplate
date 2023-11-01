@@ -24,7 +24,7 @@ public class GetUserQueryHandlerTests
     }
 
     [Fact]
-    public async Task Handle_ValidIdGetUserQuery_ReturnsRequestedUserAsUserDTOAsync()
+    public async Task Handle_ValidIdGetUserQuery_ShouldReturnRequestedUserAsUserDTOAsync()
     {
         // Arrange
         var guid = Guid.NewGuid();

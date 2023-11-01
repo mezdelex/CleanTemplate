@@ -1,4 +1,5 @@
 using Application.Contexts;
+using Application.Users.Shared;
 using Domain.Users;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

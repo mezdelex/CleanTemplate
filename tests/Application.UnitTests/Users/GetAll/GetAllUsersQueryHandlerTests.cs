@@ -24,15 +24,19 @@ public class GetAllUsersQueryHandlerTests
     }
 
     [Fact]
-    public async Task Handle_GetAllUsersQuery_ReturnsGivenUsersAsListOfUserDTOAsync()
+    public async Task Handle_GetAllUsersQuery_ShouldReturnPagedListOfRequestedUsersAsListOfUserDTOAndMetadataAsync()
     {
         // Arrange
-        var getAllUsersQuery = new GetAllUsersQuery();
+        var page = 1;
+        var pageSize = 2;
+        var getAllUsersQuery = new GetAllUsersQuery(page, pageSize);
         var users = new List<User> {
             new(Guid.NewGuid(), "test1", "test1@test.com", "test1"),
             new(Guid.NewGuid(), "test2", "test2@test.com", "test2")
         };
-        _dbSet.As<IQueryable<User>>().Setup(mock => mock.Provider).Returns(users.AsQueryable().Provider);
+        _dbSet.As<IAsyncEnumerable<User>>().Setup(mock => mock.GetAsyncEnumerator(It.IsAny<CancellationToken>()))
+            .Returns(new TestAsyncEnumerator<User>(users.AsQueryable().GetEnumerator()));
+        _dbSet.As<IQueryable<User>>().Setup(mock => mock.Provider).Returns(new TestAsyncQueryProvider<User>(users.AsQueryable().Provider));
         _dbSet.As<IQueryable<User>>().Setup(mock => mock.Expression).Returns(users.AsQueryable().Expression);
         _dbSet.As<IQueryable<User>>().Setup(mock => mock.ElementType).Returns(users.AsQueryable().ElementType);
         _dbSet.As<IQueryable<User>>().Setup(mock => mock.GetEnumerator()).Returns(users.AsQueryable().GetEnumerator());
@@ -42,13 +46,17 @@ public class GetAllUsersQueryHandlerTests
         var result = await _handler.Handle(getAllUsersQuery, _cancellationToken);
 
         // Assert
-        result[0].Id.Should().Be(users[0].Id);
-        result[0].Name.Should().Be(users[0].Name);
-        result[0].Email.Should().Be(users[0].Email);
-        result[1].Id.Should().Be(users[1].Id);
-        result[1].Name.Should().Be(users[1].Name);
-        result[1].Email.Should().Be(users[1].Email);
-        result.Count.Should().Be(users.Count);
+        result.Items[0].Id.Should().Be(users[0].Id);
+        result.Items[0].Name.Should().Be(users[0].Name);
+        result.Items[0].Email.Should().Be(users[0].Email);
+        result.Items[1].Id.Should().Be(users[1].Id);
+        result.Items[1].Name.Should().Be(users[1].Name);
+        result.Items[1].Email.Should().Be(users[1].Email);
+        result.TotalCount.Should().Be(users.Count);
+        result.Page.Should().Be(page);
+        result.PageSize.Should().Be(pageSize);
+        result.HasPreviousPage.Should().Be(false);
+        result.HasNextPage.Should().Be(false);
         _context.Verify();
     }
 }

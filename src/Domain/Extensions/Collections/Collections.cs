@@ -1,0 +1,33 @@
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
+
+namespace Domain.Extensions.Collections;
+
+public static class Collections
+{
+    public sealed record PagedList<T>(List<T> Items, int Page, int PageSize, int TotalCount, bool HasPreviousPage, bool HasNextPage);
+
+    public static async Task<PagedList<T>> ToPagedListAsync<T>(this IQueryable<T> query, int page, int pageSize, CancellationToken cancellationToken)
+    {
+        var totalCount = await query.CountAsync(cancellationToken);
+        var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
+        var hasPreviousPage = page > 1;
+        var hasNextPage = page * pageSize < totalCount;
+
+        return new PagedList<T>(items, page, pageSize, totalCount, hasPreviousPage, hasNextPage);
+    }
+
+    public static IQueryable<T> ToDynamicOrder<T>(this IQueryable<T> query, string dynamicOrderParams)
+    {
+        try
+        {
+            return string.IsNullOrWhiteSpace(dynamicOrderParams)
+                ? query
+                : query.OrderBy(dynamicOrderParams.Replace(":", " ").Replace(";", ", "));
+        }
+        catch (Exception)
+        {
+            throw new DynamicOrderParamsException(dynamicOrderParams);
+        }
+    }
+}
